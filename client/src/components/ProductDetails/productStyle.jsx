@@ -56,7 +56,7 @@ class ProductStyle extends React.Component {
               <Link to="Reviews" spy smooth>
                 Read all
                 {' '}
-                {this.props.currentReviews.count}
+                {this.props.currentReviews.results.length}
                 {' '}
                 reviews
               </Link>

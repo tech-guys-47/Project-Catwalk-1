@@ -75,7 +75,7 @@ class Reviews extends React.Component {
         this.setState({
           reviews: res.data.results,
           lessReviews: res.data.results.slice(0, 2),
-          count: res.data.count,
+          count: res.data.results.length,
         });
       })
       .catch((err) => console.log('error', err));
@@ -95,7 +95,7 @@ class Reviews extends React.Component {
 
   render() {
     const {
-      reviews, lessReviews, currentID, moreReviewtext, moreReview, meta, charItem, modalShow, count
+      reviews, lessReviews, currentID, moreReviewtext, moreReview, meta, charItem, modalShow, count,
     } = this.state;
     // default: render 2 review, if more review button is clicked, show all reviews.
     let renderReviews;

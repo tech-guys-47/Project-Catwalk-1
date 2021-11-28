@@ -1,6 +1,8 @@
 const axios = require('axios');
 const config = require('../config');
 
+const reviewsAPI = 'http://localhost:4000';
+
 module.exports = {
   products: {
     getProducts: (req, res) => {
@@ -58,26 +60,20 @@ module.exports = {
   },
   reviews: {
     getReviews: (req, res) => {
-      const productStr = `?product_id=${req.params.product_id}`;
-      axios.get(`${config.ALTELIER_API}/reviews/${productStr}`, {
-        headers: {
-          Authorization: `${config.API_KEY}`,
-        },
-      })
+      // const productStr = `?product_id=${req.params.product_id}`;
+      const productId = req.params.product_id;
+      axios.get(`${reviewsAPI}/reviews/${productId}`)
         .then((response) => {
           res.status(200).send(response.data);
         })
         .catch((err) => {
+          console.log('get rev error', err);
           res.status(500).send(err);
         });
     },
     getMetadata: (req, res) => {
-      const productStr = `?product_id=${req.params.product_id}`;
-      axios.get(`${config.ALTELIER_API}/reviews/meta/${productStr}`, {
-        headers: {
-          Authorization: `${config.API_KEY}`,
-        },
-      })
+      const productId = req.params.product_id;
+      axios.get(`${reviewsAPI}/reviews/meta/${productId}`)
         .then((response) => {
           res.status(200).send(response.data);
         })
@@ -87,11 +83,7 @@ module.exports = {
     },
     postReviews: (req, res) => {
       console.log(req.body);
-      axios.post(`${config.ALTELIER_API}/reviews`, req.body, {
-        headers: {
-          Authorization: `${config.API_KEY}`,
-        },
-      })
+      axios.post(`${reviewsAPI}/reviews`, req.body)
         .then(() => {
           res.status(200).send('Successfully made POST review');
         })
@@ -100,11 +92,12 @@ module.exports = {
         });
     },
     putReviewHelpful: (req, res) => {
-      axios.put(`${config.ALTELIER_API}/reviews/${req.params.review_id}/helpful`, {}, {
-        headers: {
-          Authorization: `${config.API_KEY}`,
-        },
-      })
+      axios.put(`${reviewsAPI}/reviews/${req.params.review_id}/helpful`)
+      // axios.put(`${config.ALTELIER_API}/reviews/${req.params.review_id}/helpful`, {}, {
+      //   headers: {
+      //     Authorization: `${config.API_KEY}`,
+      //   },
+      // })
         .then(() => {
           res.status(200).send('Successfully made PUT request: helpful');
         })
@@ -113,11 +106,12 @@ module.exports = {
         });
     },
     putReviewReport: (req, res) => {
-      axios.put(`${config.ALTELIER_API}/reviews/${req.params.review_id}/report`, {}, {
-        headers: {
-          Authorization: `${config.API_KEY}`,
-        },
-      })
+      axios.put(`${reviewsAPI}/reviews/${req.params.review_id}/report`)
+      // axios.put(`${config.ALTELIER_API}/reviews/${req.params.review_id}/report`, {}, {
+      //   headers: {
+      //     Authorization: `${config.API_KEY}`,
+      //   },
+      // })
         .then(() => {
           res.status(200).send('Successfully made PUT request: report');
         })

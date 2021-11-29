@@ -93,11 +93,6 @@ module.exports = {
     },
     putReviewHelpful: (req, res) => {
       axios.put(`${reviewsAPI}/reviews/${req.params.review_id}/helpful`)
-      // axios.put(`${config.ALTELIER_API}/reviews/${req.params.review_id}/helpful`, {}, {
-      //   headers: {
-      //     Authorization: `${config.API_KEY}`,
-      //   },
-      // })
         .then(() => {
           res.status(200).send('Successfully made PUT request: helpful');
         })
@@ -107,11 +102,6 @@ module.exports = {
     },
     putReviewReport: (req, res) => {
       axios.put(`${reviewsAPI}/reviews/${req.params.review_id}/report`)
-      // axios.put(`${config.ALTELIER_API}/reviews/${req.params.review_id}/report`, {}, {
-      //   headers: {
-      //     Authorization: `${config.API_KEY}`,
-      //   },
-      // })
         .then(() => {
           res.status(200).send('Successfully made PUT request: report');
         })
